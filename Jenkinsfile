@@ -21,8 +21,8 @@ pipeline {
     }
     stage('Apply') {
       environment {
-        TF_VAR_option_5_aws_ssh_key_name = "adminKey"
-        TF_VAR_option_6_aws_ssh_key_name = "adminKey"
+        TF_VAR_option_5_aws_ssh_key_name = "cloud_user"
+        TF_VAR_option_6_aws_ssh_key_name = "cloud_user"
         AWS_ACCESS_KEY_ID=credentials('ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY=credentials('SECRET_KEY')
       }
