@@ -32,18 +32,18 @@ pipeline {
       }
     }
   }
-  // post {
-  //       success {
-  //           slackSend color: "good", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
-  //           archiveArtifacts artifacts: 'fitcycle_terraform/Terraform_Output.json', fingerprint: true
-  //           archiveArtifacts artifacts: 'violations_using_api.py', fingerprint: true
-  //       }
-  //       failure {
-  //           slackSend color: "danger", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
-  //       }
-  //       aborted {
-  //           slackSend color: "warning", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
-  //       }
-  //   }
+  post {
+        success {
+            slackSend color: "good", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
+            archiveArtifacts artifacts: 'fitcycle_terraform/Terraform_Output.json', fingerprint: true
+            archiveArtifacts artifacts: 'violations_using_api.py', fingerprint: true
+        }
+        failure {
+            slackSend color: "danger", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
+        }
+        aborted {
+            slackSend color: "warning", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
+        }
+    }
 }
-//  --backend-config=\"bucket=BUCKET_NAME\" --backend-config=\"key=terraform.tfstate\" --backend-config=\"region=us-east-1\" -lock=false && terraform apply --input=false --var-file=example_vars_files/us_west_1_mysql.tfvars --auto-approve"
+
