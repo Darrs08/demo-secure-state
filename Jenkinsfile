@@ -27,9 +27,9 @@ pipeline {
         AWS_SECRET_ACCESS_KEY=credentials('SECRET_KEY')
       }
       steps {
-        sh "ls"
-        sh "cd fitcycle_terraform"
-        sh "ls"
+        bat "ls"
+        bat "cd fitcycle_terraform"
+        bat "ls"
         sh "terraform init --backend-config=bucket=BUCKET_NAME --backend-config=key=terraform.tfstate --backend-config=region=us-east-1 -lockfile=false"
         sh "terraform apply --input=false --var-file=example_vars_files/us_west_1_mysql.tfvars --auto-approve"
         sh "cd fitcycle_terraform && terraform output --json > Terraform_Output.json"
