@@ -1,7 +1,7 @@
 pipeline {
   agent any
   tools {
-    terraform = 'terraf'
+    terraform = 'terraform1.0.9'
   }
   stages{
     stage ('Preparations') {
