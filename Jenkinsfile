@@ -37,12 +37,15 @@ pipeline {
             slackSend color: "good", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
             archiveArtifacts artifacts: 'fitcycle_terraform/Terraform_Output.json', fingerprint: true
             archiveArtifacts artifacts: 'violations_using_api.py', fingerprint: true
+            echo 'success'
         }
         failure {
             slackSend color: "danger", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
+            echo 'failed'
         }
         aborted {
             slackSend color: "warning", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
+            echo 'aborted'
         }
     }
 }
