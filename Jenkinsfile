@@ -22,9 +22,12 @@ pipeline {
     stage('Apply') {
       environment {
         TF_VAR_option_5_aws_ssh_key_name = "adminKey"
-        TF_VAR_option_6_aws_ssh_key_name = "adminKey"
-        AWS_ACCESS_KEY_ID=credentials('ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY=credentials('SECRET_KEY')
+            TF_VAR_option_6_aws_ssh_key_name = "adminKey"
+            TF_VAR_option_1_aws_access_key = credentials('ACCESS_KEY_ID')
+            TF_VAR_option_2_aws_secret_key = credentials('SECRET_KEY')
+            AWS_ACCESS_KEY_ID= credentials('ACCESS_KEY_ID')
+            AWS_SECRET_ACCESS_KEY= credentials('SECRET_KEY')
+            AWS_DEFAULT_REGION="us-west-1"
       }
       steps {
         sh "cd fitcycle_terraform/ && terraform init --backend-config=bucket=BUCKET_NAME --backend-config=key=terraform.tfstate --backend-config=region=us-east-1 -lockfile=false && terraform apply --input=false --var-file=example_vars_files/us_west_1_mysql.tfvars --auto-approve"
