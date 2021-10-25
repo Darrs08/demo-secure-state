@@ -28,8 +28,8 @@ pipeline {
       }
       steps {
         echo "${workspace}"
-        sh "cd ${workspace}"
         sh "cd fitcycle_terraform"
+        sh "ls"
         sh "terraform init --backend-config=bucket=BUCKET_NAME --backend-config=key=terraform.tfstate --backend-config=region=us-east-1 -lockfile=false"
         sh "terraform apply --input=false --var-file=example_vars_files/us_west_1_mysql.tfvars --auto-approve"
         sh "cd fitcycle_terraform && terraform output --json > Terraform_Output.json"
