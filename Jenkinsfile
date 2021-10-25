@@ -27,7 +27,7 @@ pipeline {
         AWS_SECRET_ACCESS_KEY=credentials('SECRET_KEY')
       }
       steps {
-        echo "${workspace}"
+        sh "ls"
         sh "cd fitcycle_terraform"
         sh "ls"
         sh "terraform init --backend-config=bucket=BUCKET_NAME --backend-config=key=terraform.tfstate --backend-config=region=us-east-1 -lockfile=false"
