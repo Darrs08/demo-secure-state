@@ -32,18 +32,18 @@ pipeline {
       }
     }
   }
-  post {
-        success {
-            slackSend color: "good", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
-            archiveArtifacts artifacts: 'fitcycle_terraform/Terraform_Output.json', fingerprint: true
-            archiveArtifacts artifacts: 'violations_using_api.py', fingerprint: true
-        }
-        failure {
-            slackSend color: "danger", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
-        }
-        aborted {
-            slackSend color: "warning", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
-        }
-    }
+  // post {
+  //       success {
+  //           slackSend color: "good", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
+  //           archiveArtifacts artifacts: 'fitcycle_terraform/Terraform_Output.json', fingerprint: true
+  //           archiveArtifacts artifacts: 'violations_using_api.py', fingerprint: true
+  //       }
+  //       failure {
+  //           slackSend color: "danger", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
+  //       }
+  //       aborted {
+  //           slackSend color: "warning", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
+  //       }
+  //   }
 }
 
