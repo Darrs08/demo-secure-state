@@ -30,7 +30,7 @@ pipeline {
            
       }
       steps {
-        sh "cd fitcycle_terraform/ && terraform init -migrate-state --backend-config=bucket=demodars --backend-config=key=path/to/my/key/some.tfstate --backend-config=region=us-east-1 -lockfile=false && terraform apply --input=false --var-file=example_vars_files/us_west_1_mysql.tfvars --auto-approve"
+        sh "cd fitcycle_terraform/ && terraform init -migrate-state --backend-config=bucket=demodars --backend-config=key=path/to/my/key/some.tfstate --backend-config=region=us-east-1 -lockfile=false && terraform apply --input=false --var-file=example_vars_files/us_east_1_mysql.tfvars --auto-approve"
       }
     }
   }
