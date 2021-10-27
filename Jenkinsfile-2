@@ -1,0 +1,26 @@
+pipeline {
+  agent any
+  stages {
+    stage('Copy Artifacts') {
+      steps {
+        step ([$class: 'CopyArtifact',
+         projectName: 'Continuous Security_Deploy',
+         filter: 'fitcycle_terraform/Terraform_Output.json']);
+        
+         step ([$class: 'CopyArtifact',
+         projectName: 'Continuous Security_Deploy',
+         filter: 'violations_using_api.py']);
+     }  
+   }
+   stage('Check for Violations') {
+      environment {
+        REFRESH_TOKEN = credentials('SS_CSP_REFRESH_TOKEN')
+      }
+      steps {
+        slackSend color: "good", message: "Status: CHECKING FOR VIOLATIONS | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
+        sh "pip install requests"
+        sh "mv fitcycle_terraform/Terraform_Output.json ."
+        sh "python violations_using_api.py"
+     }
+  }
+}
