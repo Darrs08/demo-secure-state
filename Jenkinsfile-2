@@ -13,12 +13,10 @@ pipeline {
      }  
    }
    stage('Check for Violations') {
-
       steps {
-       
         sh "pip install requests"
         sh "mv fitcycle_terraform/Terraform_Output.json ."
-        sh "python violations_using_api.py"
+        sh "python violations.py"
      }
   }
 }
