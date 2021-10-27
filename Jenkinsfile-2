@@ -8,7 +8,7 @@ pipeline {
          filter: 'fitcycle_terraform/Terraform_Output.json']);
         
          step ([$class: 'CopyArtifact',
-         projectName: 'Continuous Security_Deploy',
+         projectName: 'A Terraform Pipeline',
          filter: 'violations_using_api.py']);
      }  
    }
