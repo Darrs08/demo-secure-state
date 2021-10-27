@@ -33,23 +33,17 @@ pipeline {
         sh "cd fitcycle_terraform/ && terraform init -migrate-state --backend-config=bucket=demodars --backend-config=key=path/to/my/key/some.tfstate --backend-config=region=us-east-1 -lockfile=false && terraform apply --input=false --var-file=example_vars_files/us_east_1_mysql.tfvars --auto-approve"
         sh "cd fitcycle_terraform && terraform output --json > Terraform_Output.json"
       }
-    }
-  }
-  post {
+      post {
         success {
-            slackSend color: "good", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
-            archiveArtifacts artifacts: 'fitcycle_terraform/Terraform_Output.json', fingerprint: true
-            archiveArtifacts artifacts: 'violations_using_api.py', fingerprint: true
-            echo 'success'
+          echo 'success'
         }
         failure {
-            slackSend color: "danger", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
-            echo 'failed'
+          echo 'failed'
         }
-        aborted {
-            slackSend color: "warning", message: "Status: PIPELINE ${currentBuild.result} | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
-            echo 'aborted'
+        aborted {           
+          echo 'aborted'
         }
+      }
     }
+  }
 }
-
