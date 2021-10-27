@@ -13,7 +13,9 @@ pipeline {
      }  
    }
    stage('Check for Violations') {
-    
+      environment {
+        REFRESH_TOKEN = credentials('SS_CSP_REFRESH_TOKEN')
+      }
       steps {
        
         sh "pip install requests"
