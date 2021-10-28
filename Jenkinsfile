@@ -28,7 +28,7 @@ pipeline {
       }
     }
     stage ('Initialization Stage') {
-      step {
+      steps {
       sh 'echo Initialization started && sleep 60 && echo Initialization complete'
       }
     }
