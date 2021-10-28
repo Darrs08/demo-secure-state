@@ -27,6 +27,9 @@ pipeline {
         }
       }
     }
+    stage ('Waiting Stage') {
+      sh 'echo Initialization started && sleep 60 && echo Initialization complete'
+    }
     stage('Apply') {
       environment {
         TF_VAR_option_5_aws_ssh_key_name = "adminKey"
