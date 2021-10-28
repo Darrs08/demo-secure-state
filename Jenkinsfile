@@ -19,6 +19,11 @@ pipeline {
         sh "rm -rf terraform.zip"
       }     
     }
+    stage('Create a Bucket') {
+      steps {
+        sh 'aws s3api create-bucket --bucket demodarren --region us-east-1'
+      }
+    }
     stage('Apply') {
       environment {
         TF_VAR_option_5_aws_ssh_key_name = "adminKey"
@@ -26,11 +31,10 @@ pipeline {
         TF_VAR_option_1_aws_access_key = credentials('ACCESS_KEY_ID')
         TF_VAR_option_2_aws_secret_key = credentials('SECRET_KEY')
         AWS_ACCESS_KEY_ID= credentials('ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY= credentials('SECRET_KEY')
-           
+        AWS_SECRET_ACCESS_KEY= credentials('SECRET_KEY') 
       }
       steps {
-        sh "cd fitcycle_terraform/ && terraform init -migrate-state --backend-config=bucket=demodars --backend-config=key=path/to/my/key/some.tfstate --backend-config=region=us-east-1 -lockfile=false && terraform apply --input=false --var-file=example_vars_files/us_east_1_mysql.tfvars --auto-approve"
+        sh "cd fitcycle_terraform/ && terraform init -migrate-state --backend-config=bucket=demodarren --backend-config=key=path/to/my/key/some.tfstate --backend-config=region=us-east-1 -lockfile=false && terraform apply --input=false --var-file=example_vars_files/us_east_1_mysql.tfvars --auto-approve"
         sh "cd fitcycle_terraform && terraform output --json > Terraform_Output.json"
       }
       post {
