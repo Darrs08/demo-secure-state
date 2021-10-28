@@ -28,7 +28,9 @@ pipeline {
       }
     }
     stage ('Initialization Stage') {
+      step {
       sh 'echo Initialization started && sleep 60 && echo Initialization complete'
+      }
     }
     stage('Apply') {
       environment {
