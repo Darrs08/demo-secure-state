@@ -19,11 +19,12 @@ pipeline {
         sh "rm -rf terraform.zip"
       }     
     }
-    stage('Create a Bucket') {
+    stage('Create a Bucket and KeyPair') {
       steps {
         withAWS(region: "us-east-1", credentials: 'cloud_user') {
           awsIdentity()
           sh 'aws s3api create-bucket --bucket demodarren --region us-east-1'
+          sh 'aws ec2 create-key-pair --key-name adminKey --key-type rsa'
         }
       }
     }
