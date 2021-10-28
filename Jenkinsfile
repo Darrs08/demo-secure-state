@@ -29,7 +29,7 @@ pipeline {
     }
     stage ('Initialization Stage') {
       steps {
-      sh 'echo Initialization started && sleep 30 && echo Initialization complete'
+      sh 'echo Initialization started && sleep 180 && echo Initialization complete'
       }
     }
     stage('Apply') {
