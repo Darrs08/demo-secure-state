@@ -21,7 +21,7 @@ pipeline {
     }
     stage('Create a Bucket') {
       steps {
-        withAWS(region: stageParams.Region, credentials: stageParams.cred) {
+        withAWS(region: "us-east-1", credentials: 'cloud_user') {
           awsIdentity()
           sh 'aws s3api create-bucket --bucket demodarren --region us-east-1'
         }
