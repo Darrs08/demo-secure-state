@@ -27,7 +27,7 @@ pipeline {
         }
       }
     }
-    stage ('Waiting Stage') {
+    stage ('Initialization Stage') {
       sh 'echo Initialization started && sleep 60 && echo Initialization complete'
     }
     stage('Apply') {
