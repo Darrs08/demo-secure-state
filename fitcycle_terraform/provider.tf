@@ -9,7 +9,7 @@ provider "aws" {
 # This allows terraform to backup the *.tfstate file to AWS s3 bucket. Uncomment or Remove the lines to disable remote backup and use local state (Not Recommended)
 terraform {
    backend "s3" {
-     bucket = "demodars"
+     bucket = "demodarren"
      key    = "path/to/my/key/some.tfstate"
      region = "us-east-1"
    }
