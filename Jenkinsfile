@@ -1,4 +1,7 @@
 pipeline {
+  environment{
+  def getBrn = getGitBranchName()
+  }
   agent any
   tools {
         terraform 'terraform1.0.9'
@@ -8,6 +11,13 @@ pipeline {
       steps {
         slackSend color: "good", message: "Status: DEPLOYING CLOUD INFRA | Job: ${env.JOB_NAME} | Build number ${env.BUILD_NUMBER}"
         git 'https://github.com/Darrs08/demo-secure-state.git'
+      }
+    }
+    stage ('Preparations') {
+      steps {
+        
+        echo env.getBrn
+        
       }
     }
     stage('Install TF Dependencies') {
@@ -59,4 +69,13 @@ pipeline {
       }
     }
   }
+}
+def getGitBranchName() {
+    branch_name = scm.branches[0].name
+	if (branch_name.contains("*/")) {
+		branchName = branch_name.split("\\*/")[1]
+    } else {
+		branchName = branch_name.split("\\*/")[1]
+	}
+    return branchName
 }
