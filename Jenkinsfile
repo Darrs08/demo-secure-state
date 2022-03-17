@@ -13,11 +13,9 @@ pipeline {
         git 'https://github.com/Darrs08/demo-secure-state.git'
       }
     }
-    stage ('Preparations') {
+    stage ('branchnames') {
       steps {
-        
         echo env.getBrn
-        
       }
     }
     stage('Install TF Dependencies') {
